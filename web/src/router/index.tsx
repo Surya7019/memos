@@ -1,6 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import { isNullorUndefined } from "../helpers/utils";
-import { userService } from "../services";
+import { locationService, userService } from "../services";
 import Auth from "../pages/Auth";
 import Explore from "../pages/Explore";
 import Home from "../pages/Home";
@@ -10,11 +10,15 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <Auth />,
+    loader: () => {
+      locationService.correctPathname("/auth");
+    },
   },
   {
     path: "/",
     element: <Home />,
     loader: async () => {
+      locationService.correctPathname("/");
       try {
         await userService.initialState();
       } catch (error) {
@@ -49,6 +53,8 @@ const router = createBrowserRouter([
     path: "/explore",
     element: <Explore />,
     loader: async () => {
+      locationService.correctPathname("/explore");
+
       try {
         await userService.initialState();
       } catch (error) {

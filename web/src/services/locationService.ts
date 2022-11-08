@@ -27,6 +27,10 @@ const locationService = {
     store.dispatch(updateStateWithLocation());
   },
 
+  correctPathname: (pathname: string) => {
+    store.dispatch(setPathname(pathname));
+  },
+
   setPathname: (pathname: string) => {
     store.dispatch(setPathname(pathname));
     updateLocationUrl();
