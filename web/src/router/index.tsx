@@ -19,6 +19,7 @@ const router = createBrowserRouter([
     element: <Home />,
     loader: async () => {
       locationService.correctPathname("/");
+
       try {
         await userService.initialState();
       } catch (error) {
